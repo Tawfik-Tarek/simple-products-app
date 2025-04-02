@@ -11,7 +11,7 @@ export async function generateMetadata({
   params: { id: string };
 }): Promise<Metadata> {
   try {
-    const { id } = await params;
+    const { id } = params;
     const product = await fetchProduct(id);
 
     // If we got a fallback "Product Not Available" object
