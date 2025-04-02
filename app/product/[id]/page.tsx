@@ -5,14 +5,15 @@ import { fetchProduct } from "@/lib/api";
 import DeleteButton from "@/components/DeleteButton";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string };
-}): Promise<Metadata> {
+type Params = {
+  params: {
+    id: string;
+  };
+};
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
   try {
-    const { id } = params;
-    const product = await fetchProduct(id);
+    const product = await fetchProduct(params.id);
 
     // If we got a fallback "Product Not Available" object
     if (product.title === "Product Not Available") {
@@ -35,14 +36,9 @@ export async function generateMetadata({
   }
 }
 
-export default async function ProductPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function ProductPage({ params }: Params) {
   try {
-    const { id } = params;
-    const product = await fetchProduct(id);
+    const product = await fetchProduct(params.id);
 
     // If we got a fallback "Product Not Available" object
     if (product.title === "Product Not Available") {
