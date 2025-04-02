@@ -5,14 +5,15 @@ import { fetchProduct } from "@/lib/api";
 import { notFound } from "next/navigation";
 
 type Params = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   try {
-    const product = await fetchProduct(params.id);
+    const {id} = await params;
+    const product = await fetchProduct(id);
 
     // If we got a fallback "Product Not Available" object
     if (product.title === "Product Not Available") {
@@ -37,7 +38,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 export default async function EditProductPage({ params }: Params) {
   try {
-    const product = await fetchProduct(params.id);
+    const { id } = await params;
+    const product = await fetchProduct(id);
 
     // If we got a fallback "Product Not Available" object
     if (product.title === "Product Not Available") {
@@ -48,7 +50,7 @@ export default async function EditProductPage({ params }: Params) {
       <div className="container mx-auto px-4 py-8">
         <div className="mb-6">
           <Link
-            href={`/product/${params.id}`}
+            href={`/product/${id}`}
             className="text-blue-600 hover:underline flex items-center gap-1"
           >
             ← Back to product details
