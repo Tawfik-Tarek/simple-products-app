@@ -41,7 +41,7 @@ export default async function ProductPage({
   params: { id: string };
 }) {
   try {
-    const { id } = await params;
+    const { id } = params;
     const product = await fetchProduct(id);
 
     // If we got a fallback "Product Not Available" object

@@ -40,7 +40,7 @@ export default async function EditProductPage({
   params: { id: string };
 }) {
   try {
-    const { id } = await params;
+    const { id } = params;
     const product = await fetchProduct(id);
 
     // If we got a fallback "Product Not Available" object
@@ -84,7 +84,8 @@ export default async function EditProductPage({
             Error Loading Product for Editing
           </h1>
           <p className="mb-6">
-            There was an error loading this product. The product might not exist or there was a problem with the server.
+            There was an error loading this product. The product might not exist
+            or there was a problem with the server.
           </p>
           <Link
             href="/"
